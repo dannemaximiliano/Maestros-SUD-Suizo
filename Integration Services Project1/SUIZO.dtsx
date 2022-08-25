@@ -1,0 +1,1709 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/4/2022 11:05:48 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LAP07"
+  DTS:CreatorName="LAP07\UARFA"
+  DTS:DTSID="{2AE3239E-439D-4B9A-B85D-CB485BE69C7F}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.170"
+  DTS:LocaleID="11274"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="8"
+  DTS:VersionGUID="{8B37D1AC-93BF-4F65-B766-B80E9760ACFE}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Administrador de conexiones con Excel]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{9175D156-36A7-4C52-8664-1ACA5E96DD6B}"
+      DTS:ObjectName="Administrador de conexiones con Excel">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="0"
+          DTS:ConnectRetryInterval="0"
+          DTS:ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\mD\Datos\SUIZO\Entrada\perfumeria.xls;Extended Properties=&quot;EXCEL 8.0;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Fragancias]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{28FF6A20-7016-464F-8575-0BED8B617F2D}"
+      DTS:ObjectName="Fragancias">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="0"
+          DTS:ConnectRetryInterval="0"
+          DTS:ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\mD\Datos\SUIZO\Entrada\fragancias.xls;Extended Properties=&quot;EXCEL 8.0;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Insumos]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{50895805-4C77-49F6-B6AE-16301E4C821F}"
+      DTS:ObjectName="Insumos">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="0"
+          DTS:ConnectRetryInterval="0"
+          DTS:ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\mD\Datos\SUIZO\Entrada\insumos.xls;Extended Properties=&quot;EXCEL 8.0;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[MaestroSUIZO.xls]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{88F9000B-C528-418F-8D35-83F14320EB52}"
+      DTS:ObjectName="MaestroSUIZO.xls">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="C:\mD\Datos\SUIZO\Salida\MaestroSUIZO.xls" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[PlanillaSUIZO.xls]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{3B7AED63-39E5-48CC-8122-4D6541225A60}"
+      DTS:ObjectName="PlanillaSUIZO.xls">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="C:\mD\Datos\SUIZO\Salida\PlanillaSUIZO.xls" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DuplicarPlantilla"
+      DTS:CreationName="Microsoft.FileSystemTask"
+      DTS:Description="Tarea Sistema de archivos"
+      DTS:DTSID="{E2FABCE5-B968-4823-B2F8-8B2F1A409FBF}"
+      DTS:ExecutableType="Microsoft.FileSystemTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DuplicarPlantilla"
+      DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <FileSystemData
+          TaskOverwriteDestFile="True"
+          TaskSourcePath="{88F9000B-C528-418F-8D35-83F14320EB52}"
+          TaskDestinationPath="{3B7AED63-39E5-48CC-8122-4D6541225A60}" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Tarea Flujo de datos"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarea Flujo de datos"
+      DTS:DTSID="{8E483E82-011B-4D03-8B84-62EE0DA3AD99}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Tarea Flujo de datos"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Tarea Flujo de datos\1Perfumeria"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Origen de Excel;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Origen de Excel"
+              name="1Perfumeria"
+              usesDispositions="true"
+              validateExternalMetadata="False"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset">'perfumeria - copia$'</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="Variable que contiene el comando SQL para ejecutar."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="La asignación de parámetros del comando SQL a variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Tarea Flujo de datos\1Perfumeria.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Administrador de conexiones con Excel]"
+                  connectionManagerRefId="Package.ConnectionManagers[Administrador de conexiones con Excel]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel]"
+                  name="Salida de origen de Excel">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[CodigoInt]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].ExternalColumns[Código]"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[CodigoInt]"
+                      name="CodigoInt"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[EAN1]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].ExternalColumns[Cód# barras]"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[EAN1]"
+                      name="EAN1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[Descripcion]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].ExternalColumns[Artículo]"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[Descripcion]"
+                      name="Descripcion"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[Precio]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].ExternalColumns[Precio]"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[Precio]"
+                      name="Precio"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[Precio Oferta]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].ExternalColumns[Precio con ofer]"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[Precio Oferta]"
+                      name="Precio Oferta"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[Precio DTO]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].ExternalColumns[Precio con dto]"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[Precio DTO]"
+                      name="Precio DTO"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[PVP]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].ExternalColumns[PVP]"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[PVP]"
+                      name="PVP"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[Proveedor]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].ExternalColumns[Proveedor]"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[Proveedor]"
+                      name="Proveedor"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[Eliminar1]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].ExternalColumns[cod_proveedor]"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[Eliminar1]"
+                      name="Eliminar1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[Eliminar2]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].ExternalColumns[categoria]"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[Eliminar2]"
+                      name="Eliminar2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[Eliminar3]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].ExternalColumns[cod_categoria]"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[Eliminar3]"
+                      name="Eliminar3"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[Eliminar4]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].ExternalColumns[subcategoria]"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[Eliminar4]"
+                      name="Eliminar4"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[Eliminar5]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].ExternalColumns[cod_subcategoria]"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[Eliminar5]"
+                      name="Eliminar5"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[EAN2]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].ExternalColumns[codigobarras1]"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[EAN2]"
+                      name="EAN2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[EAN3]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].ExternalColumns[codigobarras2]"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[EAN3]"
+                      name="EAN3"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[EAN4]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].ExternalColumns[codigobarras3]"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[EAN4]"
+                      name="EAN4"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[EAN5]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].ExternalColumns[codigobarras4]"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[EAN5]"
+                      name="EAN5"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[EAN6]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].ExternalColumns[codigobarras5]"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[EAN6]"
+                      name="EAN6"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[Eliminar6]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].ExternalColumns[r]"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[Eliminar6]"
+                      name="Eliminar6"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[Eliminar7]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].ExternalColumns[s]"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[Eliminar7]"
+                      name="Eliminar7"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].ExternalColumns[Código]"
+                      dataType="r8"
+                      name="Código" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].ExternalColumns[Cód# barras]"
+                      dataType="r8"
+                      name="Cód# barras" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].ExternalColumns[Artículo]"
+                      dataType="wstr"
+                      length="255"
+                      name="Artículo" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].ExternalColumns[Precio]"
+                      dataType="r8"
+                      name="Precio" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].ExternalColumns[Precio con ofer]"
+                      dataType="r8"
+                      name="Precio con ofer" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].ExternalColumns[Precio con dto]"
+                      dataType="r8"
+                      name="Precio con dto" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].ExternalColumns[PVP]"
+                      dataType="r8"
+                      name="PVP" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].ExternalColumns[Proveedor]"
+                      dataType="wstr"
+                      length="255"
+                      name="Proveedor" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].ExternalColumns[cod_proveedor]"
+                      dataType="r8"
+                      name="cod_proveedor" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].ExternalColumns[categoria]"
+                      dataType="wstr"
+                      length="255"
+                      name="categoria" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].ExternalColumns[cod_categoria]"
+                      dataType="r8"
+                      name="cod_categoria" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].ExternalColumns[subcategoria]"
+                      dataType="wstr"
+                      length="255"
+                      name="subcategoria" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].ExternalColumns[cod_subcategoria]"
+                      dataType="r8"
+                      name="cod_subcategoria" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].ExternalColumns[codigobarras1]"
+                      dataType="r8"
+                      name="codigobarras1" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].ExternalColumns[codigobarras2]"
+                      dataType="r8"
+                      name="codigobarras2" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].ExternalColumns[codigobarras3]"
+                      dataType="r8"
+                      name="codigobarras3" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].ExternalColumns[codigobarras4]"
+                      dataType="wstr"
+                      length="255"
+                      name="codigobarras4" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].ExternalColumns[codigobarras5]"
+                      dataType="wstr"
+                      length="255"
+                      name="codigobarras5" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].ExternalColumns[r]"
+                      dataType="r8"
+                      name="r" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].ExternalColumns[s]"
+                      dataType="r8"
+                      name="s" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de Excel">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[Código]"
+                      dataType="r8"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[Código]"
+                      name="Código" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[Cód# barras]"
+                      dataType="r8"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[Cód# barras]"
+                      name="Cód# barras" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[Artículo]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[Artículo]"
+                      name="Artículo" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[Precio]"
+                      dataType="r8"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[Precio]"
+                      name="Precio" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[Precio con ofer]"
+                      dataType="r8"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[Precio con ofer]"
+                      name="Precio con ofer" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[Precio con dto]"
+                      dataType="r8"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[Precio con dto]"
+                      name="Precio con dto" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[PVP]"
+                      dataType="r8"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[PVP]"
+                      name="PVP" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[Proveedor]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[Proveedor]"
+                      name="Proveedor" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[cod_proveedor]"
+                      dataType="r8"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[cod_proveedor]"
+                      name="cod_proveedor" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[categoria]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[categoria]"
+                      name="categoria" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[cod_categoria]"
+                      dataType="r8"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[cod_categoria]"
+                      name="cod_categoria" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[subcategoria]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[subcategoria]"
+                      name="subcategoria" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[cod_subcategoria]"
+                      dataType="r8"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[cod_subcategoria]"
+                      name="cod_subcategoria" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[codigobarras1]"
+                      dataType="r8"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[codigobarras1]"
+                      name="codigobarras1" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[codigobarras2]"
+                      dataType="r8"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[codigobarras2]"
+                      name="codigobarras2" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[codigobarras3]"
+                      dataType="r8"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[codigobarras3]"
+                      name="codigobarras3" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[codigobarras4]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[codigobarras4]"
+                      name="codigobarras4" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[codigobarras5]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[codigobarras5]"
+                      name="codigobarras5" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[r]"
+                      dataType="r8"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[r]"
+                      name="r" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[s]"
+                      dataType="r8"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[s]"
+                      name="s" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de error de origen de Excel].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Tarea Flujo de datos\2Insumos"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Origen de Excel;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Origen de Excel"
+              name="2Insumos"
+              usesDispositions="true"
+              validateExternalMetadata="False"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset">insumos$</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="Variable que contiene el comando SQL para ejecutar."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="La asignación de parámetros del comando SQL a variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Tarea Flujo de datos\2Insumos.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Insumos]"
+                  connectionManagerRefId="Package.ConnectionManagers[Insumos]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel]"
+                  name="Salida de origen de Excel">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].Columns[CodigoInt]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].ExternalColumns[Codigo]"
+                      lineageId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].Columns[CodigoInt]"
+                      name="CodigoInt"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].Columns[Descripcion]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].ExternalColumns[Descripcion]"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].Columns[Descripcion]"
+                      name="Descripcion"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].Columns[Presentacion]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].ExternalColumns[Pres#]"
+                      lineageId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].Columns[Presentacion]"
+                      name="Presentacion"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].Columns[Proveedor]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].ExternalColumns[Marca]"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].Columns[Proveedor]"
+                      name="Proveedor"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].Columns[Precio]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].ExternalColumns[Precio farmacia]"
+                      lineageId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].Columns[Precio]"
+                      name="Precio"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].Columns[Stock]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].ExternalColumns[Stock]"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].Columns[Stock]"
+                      name="Stock"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].Columns[descuento]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].ExternalColumns[descuento]"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].Columns[descuento]"
+                      name="descuento"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].Columns[Precio DTO]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].ExternalColumns[Su precio]"
+                      lineageId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].Columns[Precio DTO]"
+                      name="Precio DTO"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].Columns[Iva]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].ExternalColumns[Iva]"
+                      lineageId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].Columns[Iva]"
+                      name="Iva"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].Columns[EAN1]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].ExternalColumns[Cod Barra]"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].Columns[EAN1]"
+                      name="EAN1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].Columns[Cod Proveedor]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].ExternalColumns[Cod Proveedor]"
+                      lineageId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].Columns[Cod Proveedor]"
+                      name="Cod Proveedor"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].ExternalColumns[Codigo]"
+                      dataType="r8"
+                      name="Codigo" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].ExternalColumns[Descripcion]"
+                      dataType="wstr"
+                      length="255"
+                      name="Descripcion" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].ExternalColumns[Pres#]"
+                      dataType="r8"
+                      name="Pres#" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].ExternalColumns[Marca]"
+                      dataType="wstr"
+                      length="255"
+                      name="Marca" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].ExternalColumns[Precio farmacia]"
+                      dataType="r8"
+                      name="Precio farmacia" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].ExternalColumns[Stock]"
+                      dataType="wstr"
+                      length="255"
+                      name="Stock" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].ExternalColumns[descuento]"
+                      dataType="wstr"
+                      length="255"
+                      name="descuento" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].ExternalColumns[Su precio]"
+                      dataType="r8"
+                      name="Su precio" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].ExternalColumns[Iva]"
+                      dataType="r8"
+                      name="Iva" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].ExternalColumns[Cod Barra]"
+                      dataType="wstr"
+                      length="255"
+                      name="Cod Barra" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].ExternalColumns[Cod Proveedor]"
+                      dataType="r8"
+                      name="Cod Proveedor" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de error de origen de Excel]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de Excel">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de error de origen de Excel].Columns[Codigo]"
+                      dataType="r8"
+                      lineageId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de error de origen de Excel].Columns[Codigo]"
+                      name="Codigo" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de error de origen de Excel].Columns[Descripcion]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de error de origen de Excel].Columns[Descripcion]"
+                      name="Descripcion" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de error de origen de Excel].Columns[Pres#]"
+                      dataType="r8"
+                      lineageId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de error de origen de Excel].Columns[Pres#]"
+                      name="Pres#" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de error de origen de Excel].Columns[Marca]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de error de origen de Excel].Columns[Marca]"
+                      name="Marca" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de error de origen de Excel].Columns[Precio farmacia]"
+                      dataType="r8"
+                      lineageId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de error de origen de Excel].Columns[Precio farmacia]"
+                      name="Precio farmacia" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de error de origen de Excel].Columns[Stock]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de error de origen de Excel].Columns[Stock]"
+                      name="Stock" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de error de origen de Excel].Columns[descuento]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de error de origen de Excel].Columns[descuento]"
+                      name="descuento" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de error de origen de Excel].Columns[Su precio]"
+                      dataType="r8"
+                      lineageId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de error de origen de Excel].Columns[Su precio]"
+                      name="Su precio" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de error de origen de Excel].Columns[Iva]"
+                      dataType="r8"
+                      lineageId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de error de origen de Excel].Columns[Iva]"
+                      name="Iva" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de error de origen de Excel].Columns[Cod Barra]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de error de origen de Excel].Columns[Cod Barra]"
+                      name="Cod Barra" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de error de origen de Excel].Columns[Cod Proveedor]"
+                      dataType="r8"
+                      lineageId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de error de origen de Excel].Columns[Cod Proveedor]"
+                      name="Cod Proveedor" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de error de origen de Excel].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de error de origen de Excel].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de error de origen de Excel].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de error de origen de Excel].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Tarea Flujo de datos\3Fragancias"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Origen de Excel;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Origen de Excel"
+              name="3Fragancias"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset">fragancias$</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="Variable que contiene el comando SQL para ejecutar."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="La asignación de parámetros del comando SQL a variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Tarea Flujo de datos\3Fragancias.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Fragancias]"
+                  connectionManagerRefId="Package.ConnectionManagers[Fragancias]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de origen de Excel]"
+                  name="Salida de origen de Excel">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de origen de Excel].Columns[CodigoInt]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de origen de Excel].ExternalColumns[Codigo]"
+                      lineageId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de origen de Excel].Columns[CodigoInt]"
+                      name="CodigoInt"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de origen de Excel].Columns[EAN1]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de origen de Excel].ExternalColumns[Cod# barras]"
+                      lineageId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de origen de Excel].Columns[EAN1]"
+                      name="EAN1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de origen de Excel].Columns[Descripcion]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de origen de Excel].ExternalColumns[Articulo]"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de origen de Excel].Columns[Descripcion]"
+                      name="Descripcion"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de origen de Excel].Columns[Precio Oferta]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de origen de Excel].ExternalColumns[Oferta]"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de origen de Excel].Columns[Precio Oferta]"
+                      name="Precio Oferta"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de origen de Excel].Columns[Precio]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de origen de Excel].ExternalColumns[Su precio]"
+                      lineageId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de origen de Excel].Columns[Precio]"
+                      name="Precio"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de origen de Excel].Columns[PVP]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de origen de Excel].ExternalColumns[Precio Publico]"
+                      lineageId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de origen de Excel].Columns[PVP]"
+                      name="PVP"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de origen de Excel].Columns[IVA]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de origen de Excel].ExternalColumns[Iva]"
+                      lineageId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de origen de Excel].Columns[IVA]"
+                      name="IVA"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de origen de Excel].Columns[Proveedor]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de origen de Excel].ExternalColumns[Marca]"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de origen de Excel].Columns[Proveedor]"
+                      name="Proveedor"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de origen de Excel].Columns[Stock]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de origen de Excel].ExternalColumns[Stock]"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de origen de Excel].Columns[Stock]"
+                      name="Stock"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de origen de Excel].ExternalColumns[Codigo]"
+                      dataType="r8"
+                      name="Codigo" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de origen de Excel].ExternalColumns[Cod# barras]"
+                      dataType="r8"
+                      name="Cod# barras" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de origen de Excel].ExternalColumns[Articulo]"
+                      dataType="wstr"
+                      length="255"
+                      name="Articulo" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de origen de Excel].ExternalColumns[Oferta]"
+                      dataType="wstr"
+                      length="255"
+                      name="Oferta" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de origen de Excel].ExternalColumns[Su precio]"
+                      dataType="r8"
+                      name="Su precio" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de origen de Excel].ExternalColumns[Precio Publico]"
+                      dataType="r8"
+                      name="Precio Publico" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de origen de Excel].ExternalColumns[Iva]"
+                      dataType="r8"
+                      name="Iva" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de origen de Excel].ExternalColumns[Marca]"
+                      dataType="wstr"
+                      length="255"
+                      name="Marca" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de origen de Excel].ExternalColumns[Stock]"
+                      dataType="wstr"
+                      length="255"
+                      name="Stock" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de error de origen de Excel]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de Excel">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de error de origen de Excel].Columns[Codigo]"
+                      dataType="r8"
+                      lineageId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de error de origen de Excel].Columns[Codigo]"
+                      name="Codigo" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de error de origen de Excel].Columns[Cod# barras]"
+                      dataType="r8"
+                      lineageId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de error de origen de Excel].Columns[Cod# barras]"
+                      name="Cod# barras" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de error de origen de Excel].Columns[Articulo]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de error de origen de Excel].Columns[Articulo]"
+                      name="Articulo" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de error de origen de Excel].Columns[Oferta]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de error de origen de Excel].Columns[Oferta]"
+                      name="Oferta" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de error de origen de Excel].Columns[Su precio]"
+                      dataType="r8"
+                      lineageId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de error de origen de Excel].Columns[Su precio]"
+                      name="Su precio" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de error de origen de Excel].Columns[Precio Publico]"
+                      dataType="r8"
+                      lineageId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de error de origen de Excel].Columns[Precio Publico]"
+                      name="Precio Publico" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de error de origen de Excel].Columns[Iva]"
+                      dataType="r8"
+                      lineageId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de error de origen de Excel].Columns[Iva]"
+                      name="Iva" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de error de origen de Excel].Columns[Marca]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de error de origen de Excel].Columns[Marca]"
+                      name="Marca" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de error de origen de Excel].Columns[Stock]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de error de origen de Excel].Columns[Stock]"
+                      name="Stock" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de error de origen de Excel].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de error de origen de Excel].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de error de origen de Excel].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Tarea Flujo de datos\3Fragancias.Outputs[Salida de error de origen de Excel].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Tarea Flujo de datos\Unión de todo"
+              componentClassID="Microsoft.UnionAll"
+              contactInfo="Unión de todo;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Combina las filas de varios flujos de datos sin ordenarlos. Por ejemplo, devuelve filas a un flujo de datos después de corregir los errores. Si el orden es importante, se recomienda usar la transformación Mezclar."
+              name="Unión de todo"
+              version="1">
+              <inputs>
+                <input
+                  refId="Package\Tarea Flujo de datos\Unión de todo.Inputs[Entrada de Unión de todo 1]"
+                  name="Entrada de Unión de todo 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos\Unión de todo.Inputs[Entrada de Unión de todo 1].Columns[CodigoInt]"
+                      cachedDataType="r8"
+                      cachedName="CodigoInt"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[CodigoInt]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Id. de linaje de columna de salida"
+                          name="OutputColumnLineageID">#{Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[CodigoInt]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos\Unión de todo.Inputs[Entrada de Unión de todo 1].Columns[EAN1]"
+                      cachedDataType="r8"
+                      cachedName="EAN1"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[EAN1]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Id. de linaje de columna de salida"
+                          name="OutputColumnLineageID">#{Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[EAN1]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos\Unión de todo.Inputs[Entrada de Unión de todo 1].Columns[Descripcion]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Descripcion"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[Descripcion]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Id. de linaje de columna de salida"
+                          name="OutputColumnLineageID">#{Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Descripcion]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos\Unión de todo.Inputs[Entrada de Unión de todo 1].Columns[Precio]"
+                      cachedDataType="r8"
+                      cachedName="Precio"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[Precio]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Id. de linaje de columna de salida"
+                          name="OutputColumnLineageID">#{Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Precio]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos\Unión de todo.Inputs[Entrada de Unión de todo 1].Columns[Precio Oferta]"
+                      cachedDataType="r8"
+                      cachedName="Precio Oferta"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[Precio Oferta]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Id. de linaje de columna de salida"
+                          name="OutputColumnLineageID">#{Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Precio Oferta]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos\Unión de todo.Inputs[Entrada de Unión de todo 1].Columns[Precio DTO]"
+                      cachedDataType="r8"
+                      cachedName="Precio DTO"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[Precio DTO]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Id. de linaje de columna de salida"
+                          name="OutputColumnLineageID">#{Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Precio DTO]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos\Unión de todo.Inputs[Entrada de Unión de todo 1].Columns[PVP]"
+                      cachedDataType="r8"
+                      cachedName="PVP"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[PVP]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Id. de linaje de columna de salida"
+                          name="OutputColumnLineageID">#{Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[PVP]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos\Unión de todo.Inputs[Entrada de Unión de todo 1].Columns[Proveedor]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Proveedor"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[Proveedor]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Id. de linaje de columna de salida"
+                          name="OutputColumnLineageID">#{Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Proveedor]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos\Unión de todo.Inputs[Entrada de Unión de todo 1].Columns[EAN2]"
+                      cachedDataType="r8"
+                      cachedName="EAN2"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[EAN2]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Id. de linaje de columna de salida"
+                          name="OutputColumnLineageID">#{Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[EAN2]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos\Unión de todo.Inputs[Entrada de Unión de todo 1].Columns[EAN3]"
+                      cachedDataType="r8"
+                      cachedName="EAN3"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[EAN3]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Id. de linaje de columna de salida"
+                          name="OutputColumnLineageID">#{Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[EAN3]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos\Unión de todo.Inputs[Entrada de Unión de todo 1].Columns[EAN4]"
+                      cachedDataType="r8"
+                      cachedName="EAN4"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[EAN4]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Id. de linaje de columna de salida"
+                          name="OutputColumnLineageID">#{Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[EAN4]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos\Unión de todo.Inputs[Entrada de Unión de todo 1].Columns[EAN5]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="EAN5"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[EAN5]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Id. de linaje de columna de salida"
+                          name="OutputColumnLineageID">#{Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[EAN5]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos\Unión de todo.Inputs[Entrada de Unión de todo 1].Columns[EAN6]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="EAN6"
+                      lineageId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel].Columns[EAN6]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Id. de linaje de columna de salida"
+                          name="OutputColumnLineageID">#{Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[EAN6]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Tarea Flujo de datos\Unión de todo.Inputs[Entrada de Unión de todo 2]"
+                  hasSideEffects="true"
+                  name="Entrada de Unión de todo 2">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos\Unión de todo.Inputs[Entrada de Unión de todo 2].Columns[CodigoInt]"
+                      cachedDataType="r8"
+                      cachedName="CodigoInt"
+                      lineageId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].Columns[CodigoInt]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Id. de linaje de columna de salida"
+                          name="OutputColumnLineageID">#{Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[CodigoInt]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos\Unión de todo.Inputs[Entrada de Unión de todo 2].Columns[Descripcion]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Descripcion"
+                      lineageId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].Columns[Descripcion]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Id. de linaje de columna de salida"
+                          name="OutputColumnLineageID">#{Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Descripcion]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos\Unión de todo.Inputs[Entrada de Unión de todo 2].Columns[Proveedor]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Proveedor"
+                      lineageId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].Columns[Proveedor]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Id. de linaje de columna de salida"
+                          name="OutputColumnLineageID">#{Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Proveedor]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos\Unión de todo.Inputs[Entrada de Unión de todo 2].Columns[Precio]"
+                      cachedDataType="r8"
+                      cachedName="Precio"
+                      lineageId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].Columns[Precio]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Id. de linaje de columna de salida"
+                          name="OutputColumnLineageID">#{Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Precio]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos\Unión de todo.Inputs[Entrada de Unión de todo 2].Columns[Precio DTO]"
+                      cachedDataType="r8"
+                      cachedName="Precio DTO"
+                      lineageId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel].Columns[Precio DTO]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Id. de linaje de columna de salida"
+                          name="OutputColumnLineageID">#{Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Precio DTO]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Tarea Flujo de datos\Unión de todo.Inputs[Entrada de Unión de todo 3]"
+                  dangling="true"
+                  hasSideEffects="true"
+                  name="Entrada de Unión de todo 3">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1]"
+                  name="Salida de Unión de todo 1">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[CodigoInt]"
+                      dataType="r8"
+                      lineageId="Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[CodigoInt]"
+                      name="CodigoInt" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[EAN1]"
+                      dataType="r8"
+                      lineageId="Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[EAN1]"
+                      name="EAN1" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Descripcion]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Descripcion]"
+                      name="Descripcion" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Precio]"
+                      dataType="r8"
+                      lineageId="Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Precio]"
+                      name="Precio" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Precio Oferta]"
+                      dataType="r8"
+                      lineageId="Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Precio Oferta]"
+                      name="Precio Oferta" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Precio DTO]"
+                      dataType="r8"
+                      lineageId="Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Precio DTO]"
+                      name="Precio DTO" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[PVP]"
+                      dataType="r8"
+                      lineageId="Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[PVP]"
+                      name="PVP" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Proveedor]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Proveedor]"
+                      name="Proveedor" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Eliminar1]"
+                      dataType="r8"
+                      lineageId="Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Eliminar1]"
+                      name="Eliminar1" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Eliminar2]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Eliminar2]"
+                      name="Eliminar2" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Eliminar3]"
+                      dataType="r8"
+                      lineageId="Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Eliminar3]"
+                      name="Eliminar3" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Eliminar4]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Eliminar4]"
+                      name="Eliminar4" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Eliminar5]"
+                      dataType="r8"
+                      lineageId="Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Eliminar5]"
+                      name="Eliminar5" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[EAN2]"
+                      dataType="r8"
+                      lineageId="Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[EAN2]"
+                      name="EAN2" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[EAN3]"
+                      dataType="r8"
+                      lineageId="Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[EAN3]"
+                      name="EAN3" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[EAN4]"
+                      dataType="r8"
+                      lineageId="Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[EAN4]"
+                      name="EAN4" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[EAN5]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[EAN5]"
+                      name="EAN5" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[EAN6]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[EAN6]"
+                      name="EAN6" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Eliminar6]"
+                      dataType="r8"
+                      lineageId="Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Eliminar6]"
+                      name="Eliminar6" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Eliminar7]"
+                      dataType="r8"
+                      lineageId="Package\Tarea Flujo de datos\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Eliminar7]"
+                      name="Eliminar7" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Tarea Flujo de datos.Paths[Salida de origen de Excel]"
+              endId="Package\Tarea Flujo de datos\Unión de todo.Inputs[Entrada de Unión de todo 1]"
+              name="Salida de origen de Excel"
+              startId="Package\Tarea Flujo de datos\1Perfumeria.Outputs[Salida de origen de Excel]" />
+            <path
+              refId="Package\Tarea Flujo de datos.Paths[Salida de origen de Excel1]"
+              endId="Package\Tarea Flujo de datos\Unión de todo.Inputs[Entrada de Unión de todo 2]"
+              name="Salida de origen de Excel"
+              startId="Package\Tarea Flujo de datos\2Insumos.Outputs[Salida de origen de Excel]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción]"
+      DTS:CreationName=""
+      DTS:DTSID="{B7A7361A-897B-4832-BF79-49A95D9A69CA}"
+      DTS:From="Package\DuplicarPlantilla"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción"
+      DTS:To="Package\Tarea Flujo de datos" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
+<!--Si edita manualmente esta sección y comete un error, puede eliminarlo. -->
+<!--El paquete podrá cargarse normalmente, pero se perderá la información de diseño anterior y el diseñador reorganizará los elementos automáticamente en la superficie de diseño.-->
+<Objects
+  Version="8">
+  <!--Cada uno de los nodos siguientes contiene propiedades que no afectan al comportamiento en tiempo de ejecución.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="158,42"
+          Id="Package\DuplicarPlantilla"
+          TopLeft="241,98" />
+        <NodeLayout
+          Size="180,42"
+          Id="Package\Tarea Flujo de datos"
+          TopLeft="365,193" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción]"
+          TopLeft="320,140">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="135,53"
+              Start="0,0"
+              End="135,45.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.5"
+                    Point2="0,26.5"
+                    Point3="4,26.5" />
+                  <mssgle:LineSegment
+                    End="131,26.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="131,26.5"
+                    Point2="135,26.5"
+                    Point3="135,30.5" />
+                  <mssgle:LineSegment
+                    End="135,45.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Tarea Flujo de datos">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="147,42"
+          Id="Package\Tarea Flujo de datos\Unión de todo"
+          TopLeft="448,252" />
+        <NodeLayout
+          Size="139,42"
+          Id="Package\Tarea Flujo de datos\1Perfumeria"
+          TopLeft="196,115" />
+        <NodeLayout
+          Size="127,42"
+          Id="Package\Tarea Flujo de datos\2Insumos"
+          TopLeft="489,128" />
+        <NodeLayout
+          Size="140,42"
+          Id="Package\Tarea Flujo de datos\3Fragancias"
+          TopLeft="716,183" />
+        <EdgeLayout
+          Id="Package\Tarea Flujo de datos.Paths[Salida de origen de Excel1]"
+          TopLeft="548.583333333333,170">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,82"
+              Start="0,0"
+              End="0,74.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,74.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Tarea Flujo de datos.Paths[Salida de origen de Excel]"
+          TopLeft="265.5,157">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="232.833333333333,95"
+              Start="0,0"
+              End="232.833333333333,87.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.3862718707941" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,52.3862718707941"
+                    Point2="0,56.3862718707941"
+                    Point3="4,56.3862718707941" />
+                  <mssgle:LineSegment
+                    End="228.833333333333,56.3862718707941" />
+                  <mssgle:CubicBezierSegment
+                    Point1="228.833333333333,56.3862718707941"
+                    Point2="232.833333333333,56.3862718707941"
+                    Point3="232.833333333333,60.3862718707941" />
+                  <mssgle:LineSegment
+                    End="232.833333333333,87.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Tarea Flujo de datos\2Insumos">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Tarea Flujo de datos\1Perfumeria">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Tarea Flujo de datos\3Fragancias">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
